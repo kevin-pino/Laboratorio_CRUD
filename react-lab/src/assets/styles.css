@@ -31,7 +31,7 @@
 
 body { margin: 0; background: var(--gray-100); }
 
-button, input, salect {font: inherit; }
+button, input, select { font: inherit; }
 
 /*botón por defecto = azul -> accion de crear */
 button {
@@ -48,7 +48,7 @@ button {
     transition: background-color .15s ease;
 }
 
-button:hover { background: var(--blue-dark);}
+button:hover { background: var(--blue-dark); }
 
 button:focus-visible { 
     outline: 2px solid var(--teal);
@@ -142,7 +142,7 @@ input:focus, select:focus {
     outline-offset: 1px;
     }
 
-    .actions { 
+.actions { 
     display: flex;
     gap: 8px;
     align-items: center;
@@ -252,14 +252,14 @@ tbody tr:hover { background: #f0fdfa;}
 .footer-note {
     text-align: center;
     color: var(--gray-500);
-    font-size: 075rem;
+    font-size: 0.75rem;
 }
 
 .error {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 110px 12px;
+    padding: 10px 12px;
     background: #f1f5f9;
     color: var(--gray-700);
     border-left: 3px solid var(--teal);
@@ -332,7 +332,7 @@ small{ color: var(--gray-500);}
 }
 
 .equipo-card-actions {
-    padding: 0 16px 16 px;
+    padding: 0 16px 16px;
 }
 
 /* Campo de imagen en el formulario */
@@ -351,7 +351,7 @@ small{ color: var(--gray-500);}
     font-weight: 600;
 }
 
-.image-upload-field input [type="file"] {
+.image-upload-field input[type="file"] {
     padding: 8px;
 }
 

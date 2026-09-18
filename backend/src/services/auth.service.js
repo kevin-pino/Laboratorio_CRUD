@@ -9,7 +9,7 @@ async function registerUser({ nombre, email, password}) {
     }
 
     const [existing] = await pool.execute(
-        'SELEC id_usuario FROM usuarios WHERE email = ?',
+        'SELECT id_usuario FROM usuarios WHERE email = ?',
         [email]
     );
 
@@ -17,11 +17,11 @@ async function registerUser({ nombre, email, password}) {
         throw new AppError('El correo ya esta registrado', 409);
     }
 
-    const hast = await bcrypt.hash(password, 10);
+    const hash = await bcrypt.hash(password, 10);
 
     const [result] = await pool.execute(
         'INSERT INTO usuarios (nombre, email, password, rol) VALUES (?, ?, ?, ?)',
-        [nombre, email, hast, 'cliente']
+        [nombre, email, hash, 'cliente']
     );
 
     return { id_usuario: result.insertId};

@@ -16,7 +16,7 @@ export default function TeamTable({ equipos, canDelete, onEdit, onDelete }) {
             <h2>Equipos</h2>
 
             <div className="equipos-gird">
-                {equipos.map((equipos) => {
+                {equipos.map((equipo) => {
                     const imagen = urlImagen(equipo.imagen);
 
                     return (

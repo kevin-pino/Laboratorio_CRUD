@@ -57,3 +57,6 @@ Admin:
 
 ## Flujo
 
+Login → AuthContext → JWT en localStorage → `api.js` agrega Bearer token → backend verifica JWT → autorización por rol.
+
+El boton Eliminar solo aparece para `admin`, pero el backend tambien verifica el rol. Ocultar un boton en React no constituye seguridad.

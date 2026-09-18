@@ -2,26 +2,26 @@ const fs = require('fs/promises');
 const path = require('path');
 const pool = require('../config/db');
 const AppError = require('../utils/AppError');
-const { UPLOAD_DIR } = require('../middlewares/upload.middleware')
+const { UPLOAD_DIR } = require('../middlewares/upload.middleware');
 
 async function borrarImagenSiExiste(imagen) {
     if (!imagen) return;
 
     try {
         await fs.unlink(path.join(UPLOAD_DIR, imagen));
-        } catch {
-            //Si el archivo ya no existe en disco no es un error para  el usuario.
-        }
+    } catch {
+        // Si el archivo ya no existe en disco no es un error para el usuario.
     }
+}
 
 async function listEquipos() {
-    const [rows] = await pool.execute('SELECT * FROM equipos ORDER BY id_equipos DESC');
+    const [rows] = await pool.execute('SELECT * FROM equipos ORDER BY id_equipo DESC');
     return rows;
 }
 
 async function getEquipoById(id) {
     const [rows] = await pool.execute(
-        'SELECT * FROM equipos WHERE id_equipos =?',
+        'SELECT * FROM equipos WHERE id_equipo = ?',
         [id]
     );
 
@@ -37,20 +37,20 @@ async function createEquipo({ nombre, marca, modelo }, imagen) {
         throw new AppError('nombre es obligatorio', 400);
     }
 
-const [result] = await pool.execute(
-    'INSERT INTO equipos (nombre, marca, modelo, imagen) VALUES (?, ?, ?, ?)',
-    [nombre, marca || null, modelo || null, imagen || null]
-);
+    const [result] = await pool.execute(
+        'INSERT INTO equipos (nombre, marca, modelo, imagen) VALUES (?, ?, ?, ?)',
+        [nombre, marca || null, modelo || null, imagen || null]
+    );
 
-return getEquipoById(result.insertId);
+    return getEquipoById(result.insertId);
 }
 
-async function updateEquipo(id, {nombre, marca, modelo }, imagen) {
+async function updateEquipo(id, { nombre, marca, modelo }, imagen) {
     const actual = await getEquipoById(id);
     const nuevaImagen = imagen || actual.imagen;
 
     const [result] = await pool.execute(
-        'UPDATE equipos SET nombre = ?, marca = ?, modelo = ?, imagen = ? WHERE id_equipos = ?',
+        'UPDATE equipos SET nombre = ?, marca = ?, modelo = ?, imagen = ? WHERE id_equipo = ?',
         [nombre, marca || null, modelo || null, nuevaImagen, id]
     );
 
@@ -67,12 +67,12 @@ async function deleteEquipo(id) {
     const actual = await getEquipoById(id);
 
     const [result] = await pool.execute(
-        'DELETE FROM equipos WHERE id_equipos = ?',
+        'DELETE FROM equipos WHERE id_equipo = ?',
         [id]
     );
 
     if (!result.affectedRows) {
-        throw new AppError('Equipo no encontrado' , 404);
+        throw new AppError('Equipo no encontrado', 404);
     }
 
     await borrarImagenSiExiste(actual.imagen);
