@@ -18,7 +18,7 @@ CREATE TABLE usuarios (
 );
 
 CREATE TABLE equipos (
-    id_equipos INT AUTO_INCREMENT PRIMARY KEY,
+    id_equipo INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     marca VARCHAR(100),
     modelo VARCHAR(100),

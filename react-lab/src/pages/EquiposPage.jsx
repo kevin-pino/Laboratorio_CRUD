@@ -29,7 +29,7 @@ export default function EquiposPage() {
         load();
     }, []);
 
-    async function save(date) {
+    async function save(data) {
         try {
             setError('');
 
